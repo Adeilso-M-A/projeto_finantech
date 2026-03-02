@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 from core.models import Usuario, Categoria, Transacao, Banco, ContaBancaria, CartaoDeCredito
-from core.serializers import UsuarioSerializer, CategoriaSerializer, TransacaoDetailSerializer
+from core.serializers import UsuarioSerializer, CategoriaSerializer, TransacaoDetailSerializer,BancoSerializer, ContaBancariaSerializer, CartaoDeCreditoSerializer
 from core.request_serializers import TransacaoCreateUpdateSerializer
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -40,3 +40,33 @@ class TransacaoViewSet(viewsets.ModelViewSet):
         # Implementação de Soft Delete conforme sugerido no guia
         instance.is_active = False
         instance.save()
+
+# ... (mantenha seus outros imports)
+from core.serializers import (
+    UsuarioSerializer, CategoriaSerializer,  # Adicione estes!
+)
+
+# ... (mantenha suas ViewSets de Usuario, Categoria e Transacao)
+
+class BancoViewSet(viewsets.ModelViewSet):
+    queryset = Banco.objects.all()
+    serializer_class = BancoSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['usuario']
+    search_fields = ['nome']
+
+class ContaBancariaViewSet(viewsets.ModelViewSet):
+    queryset = ContaBancaria.objects.filter(is_active=True)
+    serializer_class = ContaBancariaSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['usuario', 'banco']
+
+class CartaoDeCreditoViewSet(viewsets.ModelViewSet):
+    queryset = CartaoDeCredito.objects.all()
+    serializer_class = CartaoDeCreditoSerializer
+    permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['usuario', 'bandeira']
+    search_fields = ['nome']

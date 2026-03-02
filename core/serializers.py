@@ -24,3 +24,20 @@ class TransacaoDetailSerializer(serializers.ModelSerializer):
             'usuario', 'usuario_nome',
             'conta_bancaria', 'cartao'
         ]
+
+
+
+class BancoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Banco
+        fields = '__all__'
+
+class ContaBancariaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContaBancaria
+        fields = '__all__'
+
+class CartaoDeCreditoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartaoDeCredito
+        fields = '__all__'

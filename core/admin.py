@@ -29,5 +29,5 @@ class CategoriaAdmin(admin.ModelAdmin):
 @admin.register(Transacao)
 class TransacaoAdmin(admin.ModelAdmin):
     list_display = ('descricao', 'valor', 'data', 'categoria', 'usuario')
-    list_filter = {'data', 'categoria', 'usuario', 'tipo_transacao'}  # Se adicionar tipo no modelo
+    list_filter = ('data', 'categoria', 'usuario')
     search_fields = ('descricao',)
