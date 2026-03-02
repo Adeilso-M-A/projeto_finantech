@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('core.urls')), # Prefixo /api/ para todos os seus endpoints
+    path('api/', include('core.urls')), # Aqui é o ponto de entrada único
 ]

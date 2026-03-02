@@ -12,5 +12,5 @@ router.register(r'contas', ContaBancariaViewSet, basename='contas')
 router.register(r'cartoes', CartaoDeCreditoViewSet, basename='cartaodes')
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
