@@ -41,12 +41,6 @@ class TransacaoViewSet(viewsets.ModelViewSet):
         instance.is_active = False
         instance.save()
 
-# ... (mantenha seus outros imports)
-from core.serializers import (
-    UsuarioSerializer, CategoriaSerializer,  # Adicione estes!
-)
-
-# ... (mantenha suas ViewSets de Usuario, Categoria e Transacao)
 
 class BancoViewSet(viewsets.ModelViewSet):
     queryset = Banco.objects.all()

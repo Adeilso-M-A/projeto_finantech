@@ -100,12 +100,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# No seu arquivo settings.py
 
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'pt-br'
+
+# Fuso horário específico para quem mora em Manaus
+TIME_ZONE = 'America/Manaus'
 
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -114,8 +116,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # Django REST Framework Configuration
+# Local: Final do arquivo settings.py
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],  # Deixe vazio já que removeu o login nativo
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # Permite acesso sem token/senha
+    ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',

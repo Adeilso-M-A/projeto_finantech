@@ -1,33 +1,29 @@
 from django.contrib import admin
-from core.models import Usuario, Banco, ContaBancaria, CartaoDeCredito, Categoria, Transacao
+from .models import Usuario, Banco, ContaBancaria, CartaoDeCredito, Categoria, Transacao
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email', 'created_at', 'is_active')
-    search_fields = ('nome', 'email')
+    list_display = ('nome', 'email', 'is_active')
 
 @admin.register(Banco)
 class BancoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'usuario', 'created_at')
-    list_filter = ('usuario',)
+    list_display = ('nome',)
 
 @admin.register(ContaBancaria)
 class ContaBancariaAdmin(admin.ModelAdmin):
-    list_display = ('banco', 'usuario', 'valor', 'is_active')
-    list_filter = ('usuario', 'banco')
+    list_display = ('banco', 'usuario', 'valor')
 
 @admin.register(CartaoDeCredito)
 class CartaoDeCreditoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'bandeira', 'usuario', 'limite')
-    search_fields = ('nome', 'numero')
+    list_display = ('nome', 'bandeira', 'limite')
 
 @admin.register(Categoria)
 class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'tipo', 'usuario')
-    list_filter = ('tipo', 'usuario')
+    list_display = ('nome', 'tipo')
 
 @admin.register(Transacao)
 class TransacaoAdmin(admin.ModelAdmin):
+    # Note que aqui só temos 3 itens no list_filter. O erro dizia que o erro estava no item [3] (o quarto item).
     list_display = ('descricao', 'valor', 'data', 'categoria', 'usuario')
     list_filter = ('data', 'categoria', 'usuario')
     search_fields = ('descricao',)
